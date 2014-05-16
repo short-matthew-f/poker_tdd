@@ -35,6 +35,10 @@ class Hand
     return discard_list
   end
   
+  def empty?
+    @cards.empty?
+  end
+  
   def rank
     values = cards.map { |card| card.value }
     suits = cards.map { |card| card.suit }

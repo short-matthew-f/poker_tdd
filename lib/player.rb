@@ -10,13 +10,15 @@ class Player
     @hand = Hand.deal_hand(deck)
   end
   
+  def show_hand
+    puts hand
+  end
+  
   def discard_all
     discard_cards(@hand.cards)
   end
   
-  def show_hand
-    puts hand
-  end
+  alias_method(:fold, :discard_all)
   
   def discard?
     puts "Do you want to discard up to three cards? (y/n)"
@@ -43,6 +45,10 @@ class Player
   def fold?
     puts "Do you want to fold? (y/n)"
     gets.chomp.downcase == "y" ? true : false
+  end
+  
+  def folded?
+    @hand.empty?
   end
   
   def ante(amount)

@@ -8,7 +8,6 @@ class Game
   end
   
   def play
-    folding_players = []
     discarded_cards = []
     pool = call_for_ante
     deal_out_hands
@@ -18,6 +17,7 @@ class Game
     pool += place_bets
     reveal_winners
   end
+  
   
   def replenish_cards
     players.each do |player|
@@ -40,17 +40,21 @@ class Game
     end
   end
   
+  def players_left
+    @players.reject(&:folded?)
+  end
+  
   def place_bets
-    pool = 0
-    @players.each do |player|
+    folded_players = []
+    players_left.each do |player|
       player.show_hand
       if player.fold?
-        folding_players << player
-        next
+        player.fold
+      else
+        @pool += player.place_bet
       end
-      pool += player.place_bet
     end
-    pool
+    nil
   end
   
   def ask_for_discard
