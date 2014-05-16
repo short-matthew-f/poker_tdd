@@ -71,6 +71,6 @@ describe Deck do
       expect(deck.cards).to eq(cards + hand)
     end
   end
-  
       
+  
 end

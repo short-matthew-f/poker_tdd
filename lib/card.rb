@@ -25,7 +25,8 @@ class Card
     :ace   => "A"
   }
   
-  CARD_ORDER = [:ace] + VALUE_STRINGS.keys
+  CARD_ORDER_ACE_HIGH = VALUE_STRINGS.keys
+  CARD_ORDER_ACE_LOW = [:ace] + VALUE_STRINGS.keys[0..-2]
   
   def initialize(suit, value)
      unless Card.suits.include?(suit) and Card.values.include?(value)
